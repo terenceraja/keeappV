@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import "./index.css";
 
 //PRIME REACT CSS IMPORTS
 import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/primereact.css"; // core css
-import "primereact/resources/themes/lara-light-indigo/theme.css"; // theme
+import "primereact/resources/themes/saga-orange/theme.css"; // theme
 
 // REACT ROUTER IMPORTS
 import {
@@ -15,6 +14,26 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+
+//IMPORTS REDUX STORE & REDUX PERSIST
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import { persistStore, persistReducer } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import storage from "redux-persist/lib/storage";
+
+// IMPORTS REDUCERS
+import mouvements from "../reducers/mvt.jsx";
+
+// CONFIG REDUX STORE & REDUX PERSIST
+const reducers = combineReducers({ mouvements });
+const persistConfig = { key: "applicationName", storage };
+const store = configureStore({
+  reducer: persistReducer(persistConfig, reducers),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
+});
+const persistor = persistStore(store);
 
 // PAGES IMPORTS
 import Layout from "./Layout";
@@ -34,8 +53,12 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PrimeReactProvider>
-      <RouterProvider router={router} />
-    </PrimeReactProvider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <PrimeReactProvider>
+          <RouterProvider router={router} />
+        </PrimeReactProvider>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );

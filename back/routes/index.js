@@ -31,7 +31,7 @@ router.get("/data", async (req, res) => {
     url =
       // "https://srvdev01.local/fmi/data/v1/databases/F3G_OCEAN_DATA/layouts/mouvements/records?_offset=1&_limit=100";
 
-      "https://78.195.71.84/fmi/data/v1/databases/POC_MKA/layouts/MOUVEMENTS/records?_offset=1&_limit=1000";
+      "https://78.195.71.84/fmi/data/v1/databases/POC_MKA/layouts/MOUVEMENTS/records?_offset=1&_limit=100";
 
     headers = {
       Authorization: `Bearer ${token}`,

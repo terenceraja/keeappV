@@ -1,10 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { TabView, TabPanel } from "primereact/tabview";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightLeft } from "@fortawesome/free-solid-svg-icons";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,8 +16,6 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { Pie } from "react-chartjs-2";
-import { Line } from "react-chartjs-2";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -112,10 +111,20 @@ const ListMVTPage = () => {
       id="mainContainer"
       className="grow flex-col flex gap-10  bg-[#1b3a48] p-5"
     >
-      <h1 className=" text-[#ef8026]">LIST MOUVEMENTS</h1>
+      <span className="text-4xl font-bold text-[#ef8026]">LIST MOUVEMENTS</span>
 
       {data.length === 0 ? (
-        <span>LOADING DATA</span>
+        <span className="text-white text-3xl font-bold justify-self-center self-center">
+          LOADING DATA
+          <span>
+            <FontAwesomeIcon
+              icon={faRightLeft}
+              flip
+              size="2xl"
+              style={{ color: "#ffffff" }}
+            />
+          </span>
+        </span>
       ) : (
         <>
           <div id="Chart & Info Container" className="flex w-full gap-10">
@@ -123,17 +132,7 @@ const ListMVTPage = () => {
               id="chartContainer "
               className="bg-white h-[500px] w-[800px] rounded p-1"
             >
-              <TabView>
-                <TabPanel header="Bar Chart">
-                  <Bar options={options} data={dataChart} />
-                </TabPanel>
-                <TabPanel header="Pie Chart">
-                  <Pie data={dataChart} />;
-                </TabPanel>
-                <TabPanel header="Line Chart">
-                  <Line options={options} data={dataChart} />;
-                </TabPanel>
-              </TabView>
+              <Bar options={options} data={dataChart} />
             </div>
 
             <div id="infoContainer " className="bg-white w-full rounded p-1">
