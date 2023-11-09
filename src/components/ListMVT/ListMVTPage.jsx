@@ -101,7 +101,7 @@ const ListMVTPage = () => {
       {
         label: "Dataset 1",
         data: JSON.parse(selectedRow.serie),
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        backgroundColor: "rgba(239, 128, 38, 0.5)",
       },
     ],
   };
@@ -127,15 +127,18 @@ const ListMVTPage = () => {
         </span>
       ) : (
         <>
-          <div id="Chart & Info Container" className="flex w-full gap-10">
+          <div
+            id="Chart & Info Container"
+            className="flex w-full gap-10 min-h-[300px]"
+          >
             <div
               id="chartContainer "
-              className="bg-white h-[500px] w-[800px] rounded p-1"
+              className="bg-white w-[800px] rounded p-1"
             >
               <Bar options={options} data={dataChart} />
             </div>
 
-            <div id="infoContainer " className="bg-white w-full rounded p-1">
+            <div id="infoContainer " className="bg-white w-full rounded p-5">
               <InputText readOnly value={`${selectedRow.Portefeuille}`} />
               <InputText readOnly value={`${selectedRow.Montant}`} />
               <InputText readOnly value={`${selectedRow.Libelle}`} />

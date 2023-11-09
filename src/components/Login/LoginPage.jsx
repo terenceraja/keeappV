@@ -1,6 +1,7 @@
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { useState } from "react";
+
 import { Link } from "react-router-dom";
 import { InputText } from "primereact/inputtext";
 import { Divider } from "primereact/divider";
@@ -50,8 +51,8 @@ function LoginPage() {
               />
               <label htmlFor="username">Password</label>
             </span>
-            <Link to="/Chart">
-              <Button className="w-full" label="Login" />
+            <Link to="/portfolio">
+              <Button className="w-full" label="Login" raised />
             </Link>
           </div>
         </div>
