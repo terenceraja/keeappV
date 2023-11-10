@@ -39,5 +39,5 @@ export default function TemplateDemo() {
   );
   const end = <InputText placeholder="Search" type="text" className="w-full" />;
 
-  return <Menubar model={items} start={start} />;
+  return <Menubar className="fixed w-full z-10 " model={items} start={start} />;
 }
