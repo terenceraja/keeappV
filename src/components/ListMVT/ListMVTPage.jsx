@@ -6,24 +6,8 @@ import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightLeft } from "@fortawesome/free-solid-svg-icons";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Bar } from "react-chartjs-2";
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+
+import BarChart from "./BarChart";
 
 const ListMVTPage = () => {
   const [data, setData] = useState([]);
@@ -79,20 +63,6 @@ const ListMVTPage = () => {
     setSelectedRow(e.value);
   };
 
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Chart.js Bar Chart",
-      },
-    },
-  };
-
   const labels = ["January", "February", "March", "April"];
 
   const dataChart = {
@@ -135,7 +105,7 @@ const ListMVTPage = () => {
               id="chartContainer "
               className="bg-white w-[800px] rounded p-1"
             >
-              <Bar options={options} data={dataChart} />
+              <BarChart data={dataChart} />
             </div>
 
             <div id="infoContainer " className="bg-white w-full rounded p-5">

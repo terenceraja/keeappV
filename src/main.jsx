@@ -39,14 +39,14 @@ const persistor = persistStore(store);
 import Layout from "./Layout";
 import LoginPage from "./components/Login/LoginPage.jsx";
 import ListPF from "./components/ListPF/ListPFPage.jsx";
-import ListMVT from "./components/ListMVT/ListMVTPage.jsx";
+import FicheMVT from "./components/FicheMVT/FicheMVTPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route path="" element={<LoginPage />} />
       <Route path="portfolio" element={<ListPF />} />
-      <Route path="mouvements" element={<ListMVT />} />
+      <Route path="mouvements" element={<FicheMVT />} />
     </Route>
   )
 );
