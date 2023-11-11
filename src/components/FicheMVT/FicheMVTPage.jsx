@@ -87,7 +87,6 @@ const FicheMVTPage = () => {
       className="grow flex-col flex gap-10  bg-[#1b3a48] p-5"
     >
       <span className="text-4xl font-bold text-[#ef8026]">LIST MOUVEMENTS</span>
-
       {data.length === 0 ? (
         <span className="text-white text-3xl font-bold justify-self-center self-center">
           LOADING DATA
@@ -112,16 +111,7 @@ const FicheMVTPage = () => {
             >
               <BarChart data={dataChart} />
             </div>
-
             <div id="infoContainer " className="bg-white w-full rounded p-5">
-              {/* <InputText readOnly value={`${selectedRow.Portefeuille}`} />
-              <InputText readOnly value={`${selectedRow.Montant}`} />
-              <InputText readOnly value={`${selectedRow.Libelle}`} />
-              <InputText readOnly value={`${selectedRow.Devise}`} />
-              <InputText readOnly value={`${selectedRow.Depositaire}`} />
-              <InputText readOnly value={`${selectedRow.Operation}`} />
-              <InputText readOnly value={`${selectedRow.Valeur}`} />
-              <InputText readOnly value={`${selectedRow.serie}`} /> */}
               {inputList}
             </div>
           </div>

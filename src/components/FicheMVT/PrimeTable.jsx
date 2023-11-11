@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 
@@ -12,7 +12,6 @@ const PrimeTable = ({ selectRow, data }) => {
     });
   }
   //
-  console.log(data);
 
   // DEFING INITIAL STATE OF SELECTED ROW
   const [selectedRow, setSelectedRow] = useState({
