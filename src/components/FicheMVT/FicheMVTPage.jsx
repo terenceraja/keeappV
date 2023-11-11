@@ -1,19 +1,17 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { InputText } from "primereact/inputtext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightLeft } from "@fortawesome/free-solid-svg-icons";
-
+// IMPORTS OF COMPONENTS
 import BarChart from "./BarChart";
+import PrimeTable from "./PrimeTable";
+import { InputText } from "primereact/inputtext";
+//
 
 const FicheMVTPage = () => {
   const [data, setData] = useState([]);
   const [selectedRow, setSelectedRow] = useState({
     Devise: "EUR",
-
     Libelle:
       "MANAGEMENT FEE - Quantité titres (transfert de) - ABN AMRO BANK NV",
     Montant: 20000,
@@ -21,9 +19,9 @@ const FicheMVTPage = () => {
     Portefeuille: "000315517",
     Valeur: "12/30/2011",
     serie: "[45,84,78,60]",
+    Depositaire: "BGL",
+    PrimaryKey: "8819",
   });
-  const [chartData, setChartData] = useState({});
-  const [chartOptions, setChartOptions] = useState({});
   useEffect(() => {
     // const columnsKEE = [
     //   { field: "IdPtf", title: "Code" },
@@ -51,7 +49,6 @@ const FicheMVTPage = () => {
       .get("http://localhost:3000/data")
       .then((response) => {
         console.timeEnd("time fetch");
-        console.log("data", response.data);
         setData(response.data);
       })
       .catch((error) => {
@@ -59,10 +56,11 @@ const FicheMVTPage = () => {
       });
   }, []);
 
-  const handleOnSelection = (e) => {
-    setSelectedRow(e.value);
+  const selectRow = (rowData) => {
+    setSelectedRow(rowData);
   };
 
+  // DEFINING CHART DATA
   const labels = ["January", "February", "March", "April"];
   const dataChart = {
     labels,
@@ -74,6 +72,14 @@ const FicheMVTPage = () => {
       },
     ],
   };
+
+  // DEFINING COLUMNS FOR DATATABLE
+  const arrayOfvalues = Object.values(selectedRow);
+  console.log(arrayOfvalues);
+  const inputList = arrayOfvalues.map((value, key) => (
+    <InputText key={key} readOnly value={value} />
+  ));
+  //
 
   return (
     <div
@@ -108,77 +114,19 @@ const FicheMVTPage = () => {
             </div>
 
             <div id="infoContainer " className="bg-white w-full rounded p-5">
-              <InputText readOnly value={`${selectedRow.Portefeuille}`} />
+              {/* <InputText readOnly value={`${selectedRow.Portefeuille}`} />
               <InputText readOnly value={`${selectedRow.Montant}`} />
               <InputText readOnly value={`${selectedRow.Libelle}`} />
               <InputText readOnly value={`${selectedRow.Devise}`} />
               <InputText readOnly value={`${selectedRow.Depositaire}`} />
               <InputText readOnly value={`${selectedRow.Operation}`} />
               <InputText readOnly value={`${selectedRow.Valeur}`} />
-              <InputText readOnly value={`${selectedRow.serie}`} />
+              <InputText readOnly value={`${selectedRow.serie}`} /> */}
+              {inputList}
             </div>
           </div>
           <div id="tableContainer" className="bg-white w-full rounded p-1">
-            <DataTable
-              value={data}
-              paginator
-              reorderableColumns
-              rows={5}
-              selectionMode="single"
-              selection={selectedRow}
-              onSelectionChange={(e) => handleOnSelection(e)}
-              rowsPerPageOptions={[5, 10, 25, 50]}
-              tableStyle={{ minWidth: "50rem" }}
-            >
-              <Column
-                field="Portefeuille"
-                header="Portefeuille"
-                sortable
-                style={{ width: "10%" }}
-              ></Column>
-              <Column
-                field="Montant"
-                header="Montant"
-                sortable
-                style={{ width: "10%" }}
-              ></Column>
-              <Column
-                field="Libelle"
-                header="Libelle"
-                sortable
-                style={{ width: "25%" }}
-              ></Column>
-              <Column
-                field="Devise"
-                header="Devise"
-                sortable
-                style={{ width: "5%" }}
-              ></Column>
-              <Column
-                field="Depositaire"
-                header="Depositaire"
-                sortable
-                style={{ width: "5%" }}
-              ></Column>
-              <Column
-                field="Operation"
-                header="Date Opération"
-                sortable
-                style={{ width: "10%" }}
-              ></Column>
-              <Column
-                field="Valeur"
-                header="Date Valeur"
-                sortable
-                style={{ width: "10%" }}
-              ></Column>
-              <Column
-                field="serie"
-                header="Serie"
-                sortable
-                style={{ width: "10%" }}
-              ></Column>
-            </DataTable>
+            <PrimeTable data={data} selectRow={selectRow} />
           </div>
         </>
       )}

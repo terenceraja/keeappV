@@ -1,10 +1,20 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 
-const PrimeTable = () => {
-  const [data, setData] = useState([]);
+const PrimeTable = ({ selectRow, data }) => {
+  // TRIMMING EMPTY KEYS OF DATA
+  for (const obj of data) {
+    Object.keys(obj).forEach((key) => {
+      if (obj[key] == "") {
+        delete obj[key];
+      }
+    });
+  }
+  //
+  console.log(data);
+
+  // DEFING INITIAL STATE OF SELECTED ROW
   const [selectedRow, setSelectedRow] = useState({
     Devise: "EUR",
     Libelle:
@@ -15,11 +25,28 @@ const PrimeTable = () => {
     Valeur: "12/30/2011",
     serie: "[45,84,78,60]",
   });
-  useEffect(() => {
-    const handleOnSelection = (e) => {
-      setSelectedRow(e.value);
-    };
-  });
+  //
+
+  // HANDLING CLICK ON ROW (SWITCHES SELECTED ROW & SENDS ROW VALUE TO PARENT PAGE TO DISPLAY VALUES IN INPUTS)
+  const handleOnSelection = (e) => {
+    setSelectedRow(e.value);
+    selectRow(e.value);
+  };
+  //
+
+  // DEFINING COLUMNS FOR DATATABLE
+  const headerAndField = Object.keys(data[0]);
+  const columnsForTable = headerAndField.map((headerAndField, key) => (
+    <Column
+      key={key}
+      field={headerAndField}
+      header={headerAndField}
+      sortable
+      style={{ width: "10%" }}
+    />
+  ));
+
+  //
 
   return (
     <DataTable
@@ -33,54 +60,7 @@ const PrimeTable = () => {
       rowsPerPageOptions={[5, 10, 25, 50]}
       tableStyle={{ minWidth: "50rem" }}
     >
-      <Column
-        field="Portefeuille"
-        header="Portefeuille"
-        sortable
-        style={{ width: "10%" }}
-      ></Column>
-      <Column
-        field="Montant"
-        header="Montant"
-        sortable
-        style={{ width: "10%" }}
-      ></Column>
-      <Column
-        field="Libelle"
-        header="Libelle"
-        sortable
-        style={{ width: "25%" }}
-      ></Column>
-      <Column
-        field="Devise"
-        header="Devise"
-        sortable
-        style={{ width: "5%" }}
-      ></Column>
-      <Column
-        field="Depositaire"
-        header="Depositaire"
-        sortable
-        style={{ width: "5%" }}
-      ></Column>
-      <Column
-        field="Operation"
-        header="Date Opération"
-        sortable
-        style={{ width: "10%" }}
-      ></Column>
-      <Column
-        field="Valeur"
-        header="Date Valeur"
-        sortable
-        style={{ width: "10%" }}
-      ></Column>
-      <Column
-        field="serie"
-        header="Serie"
-        sortable
-        style={{ width: "10%" }}
-      ></Column>
+      {columnsForTable}
     </DataTable>
   );
 };
