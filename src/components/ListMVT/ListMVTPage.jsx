@@ -15,11 +15,6 @@ const ListMVTPage = () => {
   const [data, setData] = useState(null);
   let { portfolioID } = useParams();
 
-  // ON TABLE ROWCLICK
-  const selectRow = (e) => {
-    navigate(`/portfolio/${e.IdPtf}`);
-  };
-
   // DEFINING COLUMNS FOR DATATABLE
   // const headerAndField = Object.keys(data[0]);
   // const columnsForTable = headerAndField.map((headerAndField, key) => (

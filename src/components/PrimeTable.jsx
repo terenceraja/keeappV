@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 
-const PrimeTable = ({ selectRow, data }) => {
+const PrimeTable = ({ selectRow, data, columns }) => {
   // TRIMMING EMPTY KEYS OF DATA
   for (const obj of data) {
     Object.keys(obj).forEach((key) => {
@@ -34,16 +34,16 @@ const PrimeTable = ({ selectRow, data }) => {
   //
 
   // DEFINING COLUMNS FOR DATATABLE
-  const headerAndField = Object.keys(data[0]);
-  const columnsForTable = headerAndField.map((headerAndField, key) => (
-    <Column
-      key={key}
-      field={headerAndField}
-      header={headerAndField}
-      sortable
-      style={{ width: "10%" }}
-    />
-  ));
+  // const headerAndField = Object.keys(data[0]);
+  // const columnsForTable = headerAndField.map((headerAndField, key) => (
+  //   <Column
+  //     key={key}
+  //     field={headerAndField}
+  //     header={headerAndField}
+  //     sortable
+  //     style={{ width: "10%" }}
+  //   />
+  // ));
 
   //
 
@@ -59,14 +59,7 @@ const PrimeTable = ({ selectRow, data }) => {
       rowsPerPageOptions={[5, 10, 25, 50]}
       tableStyle={{ minWidth: "50rem" }}
     >
-      {columnsForTable}
-      <Column
-        field="Valeur"
-        header="Valeur"
-        sortable
-        dataType="date"
-        style={{ width: "10%" }}
-      />
+      {columns}
     </DataTable>
   );
 };

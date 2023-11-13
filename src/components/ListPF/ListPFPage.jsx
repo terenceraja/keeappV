@@ -8,7 +8,11 @@ import { Column } from "primereact/column";
 const ListePF = () => {
   let navigate = useNavigate();
   const [data, setData] = useState([{}]);
-  // DEFINING COLUMNS FOR DATATABLE
+
+  //  GET TEMP IDPTF LIST
+  const uniqueIdPtfValues = [...new Set(data.map((obj) => obj.IdPtf))];
+  const resultArray = uniqueIdPtfValues.map((idPtf) => ({ IdPtf: idPtf }));
+  //
 
   useEffect(() => {
     // Extract fieldData from each element in jsonData.response.data
@@ -17,16 +21,10 @@ const ListePF = () => {
   }, []);
 
   // DEFINING COLUMNS FOR DATATABLE
-  const headerAndField = Object.keys(data[0]);
-  const columnsForTable = headerAndField.map((headerAndField, key) => (
-    <Column
-      key={key}
-      field={headerAndField}
-      header={headerAndField}
-      sortable
-      style={{ width: "10%" }}
-    />
-  ));
+
+  const columnsForTable = (
+    <Column field="IdPtf" header="IdPtf" sortable style={{ width: "10%" }} />
+  );
 
   // ON TABLE ROWCLICK
   const selectRow = (e) => {
@@ -38,7 +36,7 @@ const ListePF = () => {
       <h1 className=" text-[#ef8026]">LIST PORTFOLIO</h1>
       <div id="tableContainer" className="bg-white w-full rounded p-1">
         <PrimeTable
-          data={data}
+          data={resultArray}
           selectRow={selectRow}
           columns={columnsForTable}
         />
