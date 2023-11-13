@@ -6,8 +6,8 @@ var router = express.Router();
 
 router.get("/data", async (req, res) => {
   let url =
-    // "https://srvdev01.local/fmi/data/v1/databases/F3G_OCEAN_DATA/sessions";
-    "https://78.195.71.84/fmi/data/v1/databases/POC_MKA/sessions";
+    "https://srvdev01.local/fmi/data/v1/databases/F3G_OCEAN_DATA/sessions";
+  // "https://78.195.71.84/fmi/data/v1/databases/POC_MKA/sessions";
   const username = "BetterForms";
   const password = 123456;
   const base64Credentials = btoa(`${username}:${password}`);
@@ -29,9 +29,9 @@ router.get("/data", async (req, res) => {
 
     let token = response.data.response.token;
     url =
-      // "https://srvdev01.local/fmi/data/v1/databases/F3G_OCEAN_DATA/layouts/mouvements/records?_offset=1&_limit=100";
+      "https://srvdev01.local/fmi/data/v1/databases/F3G_OCEAN_DATA/layouts/portefeuilles/records?_offset=1&_limit=1000";
 
-      "https://78.195.71.84/fmi/data/v1/databases/POC_MKA/layouts/MOUVEMENTS/records?_offset=1&_limit=100";
+    // "https://78.195.71.84/fmi/data/v1/databases/POC_MKA/layouts/MOUVEMENTS/records?_offset=1&_limit=500";
 
     headers = {
       Authorization: `Bearer ${token}`,

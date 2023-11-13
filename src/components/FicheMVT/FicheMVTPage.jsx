@@ -3,13 +3,15 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightLeft } from "@fortawesome/free-solid-svg-icons";
 // IMPORTS OF COMPONENTS
-import BarChart from "./BarChart";
-import PrimeTable from "./PrimeTable";
+import BarChart from "../BarChart";
+import PrimeTable from "../PrimeTable";
 import { InputText } from "primereact/inputtext";
 //
 
 const FicheMVTPage = () => {
   const [data, setData] = useState([]);
+  console.log(data);
+
   const [selectedRow, setSelectedRow] = useState({
     Devise: "EUR",
     Libelle:
@@ -44,11 +46,9 @@ const FicheMVTPage = () => {
     // ];
 
     // Fetch data from your server
-    console.time("time fetch");
     axios
       .get("http://localhost:3000/data")
       .then((response) => {
-        console.timeEnd("time fetch");
         setData(response.data);
       })
       .catch((error) => {
@@ -75,7 +75,7 @@ const FicheMVTPage = () => {
 
   // DEFINING COLUMNS FOR DATATABLE
   const arrayOfvalues = Object.values(selectedRow);
-  console.log(arrayOfvalues);
+
   const inputList = arrayOfvalues.map((value, key) => (
     <InputText key={key} readOnly value={value} />
   ));
@@ -103,15 +103,15 @@ const FicheMVTPage = () => {
         <>
           <div
             id="Chart & Info Container"
-            className="flex w-full gap-10 min-h-[300px]"
+            className="flex sm:flex-wrap lg:flex-nowrap w-full gap-10 min-h-[400px]"
           >
             <div
               id="chartContainer "
-              className="bg-white w-[800px] rounded p-1"
+              className="bg-white w-[400px] rounded p-1"
             >
               <BarChart data={dataChart} />
             </div>
-            <div id="infoContainer " className="bg-white w-full rounded p-5">
+            <div id="infoContainer " className=" bg-white  rounded p-5 ">
               {inputList}
             </div>
           </div>

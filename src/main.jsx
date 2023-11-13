@@ -40,25 +40,25 @@ import Layout from "./Layout";
 import LoginPage from "./components/Login/LoginPage.jsx";
 import ListPF from "./components/ListPF/ListPFPage.jsx";
 import FicheMVT from "./components/FicheMVT/FicheMVTPage.jsx";
+import ListMVTPage from "./components/ListMVT/ListMVTPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route path="" element={<LoginPage />} />
       <Route path="portfolio" element={<ListPF />} />
+      <Route path="portfolio/:portfolioID" element={<ListMVTPage />} />
       <Route path="mouvements" element={<FicheMVT />} />
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <PrimeReactProvider>
-          <RouterProvider router={router} />
-        </PrimeReactProvider>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <PrimeReactProvider>
+        <RouterProvider router={router} />
+      </PrimeReactProvider>
+    </PersistGate>
+  </Provider>
 );
