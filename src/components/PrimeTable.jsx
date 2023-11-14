@@ -33,20 +33,6 @@ const PrimeTable = ({ selectRow, data, columns }) => {
   };
   //
 
-  // DEFINING COLUMNS FOR DATATABLE
-  // const headerAndField = Object.keys(data[0]);
-  // const columnsForTable = headerAndField.map((headerAndField, key) => (
-  //   <Column
-  //     key={key}
-  //     field={headerAndField}
-  //     header={headerAndField}
-  //     sortable
-  //     style={{ width: "10%" }}
-  //   />
-  // ));
-
-  //
-
   return (
     <DataTable
       value={data}
