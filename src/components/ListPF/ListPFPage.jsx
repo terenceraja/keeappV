@@ -12,11 +12,13 @@ const ListePF = () => {
   //  GET TEMP IDPTF LIST
   const uniqueIdPtfValues = [...new Set(data.map((obj) => obj.IdPtf))];
   const resultArray = uniqueIdPtfValues.map((idPtf) => ({ IdPtf: idPtf }));
+  console.log(resultArray.length);
   //
 
   useEffect(() => {
     // Extract fieldData from each element in jsonData.response.data
     let dataTrim = jsonData.response.data.map((i) => i.fieldData);
+    console.log(dataTrim.length);
     setData(dataTrim);
   }, []);
 
@@ -27,8 +29,8 @@ const ListePF = () => {
   );
 
   // ON TABLE ROWCLICK
-  const selectRow = (e) => {
-    navigate(`/portfolio/${e.IdPtf}`);
+  const selectRow = (rowData) => {
+    navigate(`/portfolio/${rowData.IdPtf}`);
   };
 
   return (
